@@ -1,3 +1,10 @@
+#' ETL parser for county case data
+#'
+#' @param raw_spreadsheet_data The raw data to parse
+#' @return \itemize{
+#'   \item \code{population_data} (county name, population)
+#'   \item \code{total_case_data} (data, cases in county a1, cases in county a2, ...)
+#' }
 #' @importFrom magrittr %>%
 #' @export
 etl_parser_county_cases <- function(raw_spreadsheet_data) {
