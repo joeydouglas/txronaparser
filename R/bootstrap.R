@@ -23,5 +23,7 @@ bootstrap <- function() {
 nuke_content <- function(are_you_sure = FALSE) {
   if (are_you_sure) {
     unlink(TRP_CONFIG("working_directory"), recursive = TRUE)
+  } else {
+    warning(WARNING_NUKE_CONTENT)
   }
 }
