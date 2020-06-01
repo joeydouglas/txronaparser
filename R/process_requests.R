@@ -51,6 +51,7 @@ load_single_spreadsheet_data <- function(spreadsheet_name) {
   )
 }
 
+#' @export
 load_all_spreadsheet_data <- function(spreadsheet_config_list = trp_config$spreadsheets) {
   raw_data <- list()
   parsed_data <- list()
@@ -60,8 +61,12 @@ load_all_spreadsheet_data <- function(spreadsheet_config_list = trp_config$sprea
     parsed_data <- append(parsed_data, results[["parsed"]])
   }
 
-  list(
-    "raw" = raw_data,
-    "parsed" = parsed_data
+  assign(
+    "all_data",
+    list(
+      "raw" = raw_data,
+      "parsed" = parsed_data
+    ),
+    .GlobalEnv
   )
 }
