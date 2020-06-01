@@ -24,6 +24,8 @@ write_config <- function(config = NULL) {
     } else {
       new_config <- default_config()
     }
+  } else {
+    new_config <- config
   }
   validate_config(new_config)
   if (fs::is_absolute_path(new_config$config_file)) {
@@ -39,11 +41,11 @@ write_config <- function(config = NULL) {
 }
 
 #' @export
-load_config <- function(config_file_path) {
+load_config <- function(config_file_path = NULL) {
   defaults <- default_config()
-  if (fs::is_file(config_file_path)) {
+  if (!is.null(config_file_path) && fs::is_file(config_file_path)) {
     path_to_load <- config_file_path
-  } else if (fs::is_dir(config_file_path)) {
+  } else if (!is.null(config_file_path) && fs::is_dir(config_file_path)) {
     path_to_load <- file.path(
       config.path,
       defaults$config_file
@@ -54,10 +56,14 @@ load_config <- function(config_file_path) {
       defaults$config_file
     )
   }
-  loaded_config <- yaml::read_yaml(
-    path_to_load,
-    eval.expr = TRUE
-  )
+  if (fs::is_file(path_to_load)) {
+    loaded_config <- yaml::read_yaml(
+      path_to_load,
+      eval.expr = TRUE
+    )
+  } else {
+    loaded_config <- defaults
+  }
   validate_config(loaded_config)
   assign(
     "trp_config",
