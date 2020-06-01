@@ -1,4 +1,4 @@
-TX_RONA_PARSER_OPTIONS <- settings::options_manager(
+TRP_CONFIG <- settings::options_manager(
   working_directory = file.path(fs::path_home(), ".config", "txronaparser"),
   data_lists = list(
     "raw" = list(
@@ -13,10 +13,10 @@ TX_RONA_PARSER_OPTIONS <- settings::options_manager(
 #' @export
 tx_rona_parser_options <- function(...) {
   settings::stop_if_reserved(...)
-  TX_RONA_PARSER_OPTIONS(...)
+  TRP_CONFIG(...)
 }
 
 #' @export
 reset_tx_rona_parser_options <- function() {
-  settings::reset(TX_RONA_PARSER_OPTIONS)
+  settings::reset(TRP_CONFIG)
 }
