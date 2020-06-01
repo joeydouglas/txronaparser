@@ -8,3 +8,5 @@ Description: Parses data from the TX DSHS additional data page
 License: Apache License (>= 2.0)
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    settings
