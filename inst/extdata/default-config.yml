@@ -1,0 +1,8 @@
+---
+working_directory: !expr file.path(fs::path_home(), ".config", "txronaparser")
+config_file: config.yml
+data_lists:
+  raw:
+    save: true
+  parsed:
+    save: true
