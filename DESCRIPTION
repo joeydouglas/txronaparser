@@ -9,4 +9,6 @@ License: Apache License (>= 2.0)
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    settings
+    settings,
+    fs
+RoxygenNote: 7.1.0
