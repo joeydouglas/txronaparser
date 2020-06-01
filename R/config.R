@@ -5,22 +5,32 @@ default_config <- function() {
   )
 }
 
+validate_config <- function(config_to_validate) {
+  validator <- jsonvalidate::json_validator(CONFIG_SCHEMA_PATH)
+  validator(
+    jsonlite::toJSON(config_to_validate, auto_unbox = TRUE),
+    verbose = TRUE,
+    error = TRUE
+  )
+}
+
 write_config <- function(config = NULL) {
   if (is.null(config)) {
     if (exists("trp_config", envir = .GlobalEnv)) {
-      config <- .GlobalEnv$trp_config
+      new_config <- .GlobalEnv$trp_config
     } else {
-      config <- default_config()
+      new_config <- default_config()
     }
   }
-  if (fs::is_absolute_path(config$config_file)) {
-    config_file_name = config$config_file
+  validate_config(new_config)
+  if (fs::is_absolute_path(new_config$config_file)) {
+    config_file_name = new_config$config_file
   } else {
-    config_file_name = file.path(config$working_directory, config$config_file)
+    config_file_name = file.path(new_config$working_directory, new_config$config_file)
   }
   fs::dir_create(fs::path_dir(config_file_name))
   yaml::write_yaml(
-    config,
+    new_config,
     config_file_name
   )
 }
@@ -40,13 +50,14 @@ load_config <- function(config_file_path) {
       defaults$config_file
     )
   }
+  loaded_config <- yaml::read_yaml(
+    path_to_load,
+    eval.expr = TRUE
+  )
+  validate_config(loaded_config)
   assign(
     "trp_config",
-    yaml::read_yaml(
-      path_to_load,
-      eval.expr = TRUE
-    ),
+    loaded_config,
     envir = .GlobalEnv
   )
-
 }
