@@ -12,6 +12,8 @@ Imports:
     fs,
     yaml,
     jsonvalidate,
-    jsonlite
+    jsonlite,
+    curl,
+    readxl
 RoxygenNote: 7.1.0
 StagedInstall: no
