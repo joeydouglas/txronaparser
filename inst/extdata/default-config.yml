@@ -1,0 +1,31 @@
+---
+working_directory: !expr file.path(fs::path_home(), ".config", "txronaparser")
+config_file: config.yml
+data_lists:
+  raw:
+    save: true
+  parsed:
+    save: true
+dshs_data_source:
+  url: https://dshs.texas.gov/coronavirus/additionaldata/
+  h2_lead: Texas Data
+  href_lead: /coronavirus
+spreadsheets:
+  texascovid19dailycountycasecountdata.xlsx:
+    url: https://dshs.texas.gov/coronavirus/TexasCOVID19DailyCountyCaseCountData.xlsx
+    etl_parser: county_cases
+  texascovid19dailycountyfatalitycountdata.xlsx:
+    url: https://dshs.texas.gov/coronavirus/TexasCOVID19DailyCountyFatalityCountData.xlsx
+    etl_parser: ''
+  texascovid-19activecasedatabycounty.xlsx:
+    url: https://dshs.texas.gov/coronavirus/TexasCOVID-19ActiveCaseDatabyCounty.xlsx
+    etl_parser: ''
+  texascovid-19cumulativetestsovertimebycounty.xlsx:
+    url: https://dshs.texas.gov/coronavirus/TexasCOVID-19CumulativeTestsOverTimebyCounty.xlsx
+    etl_parser: ''
+  texascovid-19hospitalizationsovertimebytsa.xlsx:
+    url: https://dshs.texas.gov/coronavirus/TexasCOVID-19HospitalizationsOverTimebyTSA.xlsx
+    etl_parser: ''
+  texascovid19casecountdata.xlsx:
+    url: https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx
+    etl_parser: ''

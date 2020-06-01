@@ -1,0 +1,21 @@
+Package: txronaparser
+Type: Package
+Title: Parse TX DSHS Data
+Version: 0.2.0
+Author: CJ Harries
+Maintainer: CJ Harries <cj@wizardsoftheweb.pro>
+Description: Parses data from the TX DSHS additional data page
+License: Apache License (>= 2.0)
+Encoding: UTF-8
+LazyData: true
+Imports:
+    fs,
+    yaml,
+    jsonvalidate,
+    jsonlite,
+    curl,
+    readxl,
+    xml2,
+    magrittr
+RoxygenNote: 7.1.0
+StagedInstall: no

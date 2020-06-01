@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "working_directory",
+        "config_file",
+        "data_lists"
+    ],
+    "additionalProperties": true,
+    "properties": {
+        "working_directory": {
+            "$id": "#/properties/working_directory",
+            "type": "string"
+        },
+        "config_file": {
+            "$id": "#/properties/config_file",
+            "type": "string"
+        },
+        "data_lists": {
+            "$id": "#/properties/data_lists",
+            "type": "object",
+            "required": [
+                "raw",
+                "parsed"
+            ],
+            "additionalProperties": true,
+            "properties": {
+                "raw": {
+                    "$id": "#/properties/data_lists/properties/raw",
+                    "$ref": "#/definitions/data_list"
+                },
+                "parsed": {
+                    "$id": "#/properties/data_lists/properties/parsed",
+                    "$ref": "#/definitions/data_list"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "data_list": {
+            "type": "object",
+            "properties": {
+                "saved": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}
