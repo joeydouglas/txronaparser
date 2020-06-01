@@ -71,3 +71,21 @@ load_config <- function(config_file_path = NULL) {
     envir = .GlobalEnv
   )
 }
+
+# Ensures all discovered spreadsheets are in the config file
+generate_new_spreadsheets_config <- function(spreadsheet_urls = parse_spreadsheet_urls()) {
+  new_spreadsheets <- trp_config$spreadsheets
+  for (spreadsheet_url in spreadsheet_urls) {
+    file_name = tolower(basename(spreadsheet_url))
+    if (!(file_name %in% new_spreadsheets)) {
+      new_spreadsheets[[file_name]] <- list(
+        "url" = spreadsheet_url,
+        "etl_parser" = ""
+      )
+    } else {
+      new_spreadsheets[[file_name]]$url = spreadsheet_url
+    }
+  }
+
+  new_spreadsheets
+}
