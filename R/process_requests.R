@@ -1,5 +1,5 @@
 
-# Finds all the Texas spreadsheets on the page
+#' Finds all the Texas spreadsheets on the page
 #' @importFrom magrittr %>%
 parse_spreadsheet_urls <- function(data_html = scrape_source_page()) {
   urls_to_scrape <- data_html %>%
@@ -40,6 +40,14 @@ get_etl_parser <- function(etl_parser_name) {
   function(x) { list() }
 }
 
+#' Load and parse a single remote spreadsheet
+#'
+#' @param spreadsheet_name The name (from the config list) of the spreadsheet to load
+#' @return \itemize{
+#'   \item \code{raw} The unparsed spreadsheet
+#'   \item \code{parsed} If this spreadsheet has an ETL parser defined, then its return value. Otherwise empty.
+#' }
+#' @export
 load_single_spreadsheet_data <- function(spreadsheet_name) {
   spreadsheet_config <- trp_config$spreadsheets[[spreadsheet_name]]
   new_raw_data <- load_remote_spreadsheet(spreadsheet_config$url)
@@ -57,6 +65,9 @@ load_single_spreadsheet_data <- function(spreadsheet_name) {
   )
 }
 
+#' Loads and parses all the remote spreadsheets into the singleton \code{.GlobalEnv$all_data}
+#'
+#' @param spreadsheet_config_list A list of spreadsheet configs as seen in the config file
 #' @export
 load_all_spreadsheet_data <- function(spreadsheet_config_list = trp_config$spreadsheets) {
   raw_data <- list()
