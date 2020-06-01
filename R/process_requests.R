@@ -51,6 +51,7 @@ load_single_spreadsheet_data <- function(spreadsheet_name) {
   )
 }
 
+#' @export
 load_all_spreadsheet_data <- function(spreadsheet_config_list = trp_config$spreadsheets) {
   raw_data <- list()
   parsed_data <- list()
