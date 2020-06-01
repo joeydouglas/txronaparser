@@ -77,7 +77,7 @@ generate_new_spreadsheets_config <- function(spreadsheet_urls = parse_spreadshee
   new_spreadsheets <- trp_config$spreadsheets
   for (spreadsheet_url in spreadsheet_urls) {
     file_name = tolower(basename(spreadsheet_url))
-    if (!(file_name %in% new_spreadsheets)) {
+    if (!(file_name %in% names(new_spreadsheets))) {
       new_spreadsheets[[file_name]] <- list(
         "url" = spreadsheet_url,
         "etl_parser" = ""
