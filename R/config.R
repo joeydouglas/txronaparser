@@ -51,11 +51,11 @@ write_config <- function(config = NULL) {
 }
 
 #' Loads a config file. If nothing is passed, it loads the default. If a
-#' directory is passed, it looks for `config.yml` in that directory. If anything
+#' directory is passed, it looks for \code{config.yml} in that directory. If anything
 #' else is passed, it will attempt to load that as a file. If any of that fails,
 #' this will return the defaults.
 #'
-#' The result is loaded as `.GlobalEnv$trp_config`.
+#' The result is loaded as \code{.GlobalEnv$trp_config}.
 #'
 #' @param config_file_path A path
 #' @export
