@@ -1,3 +1,7 @@
+#' Attempts to load config and sets up the working directory.
+#'
+#' @param config_file_path The input sent to load_config
+#' @seealso \code{\link{load_config}}
 #' @export
 bootstrap <- function(config_file_path = NULL) {
   load_config(config_file_path = config_file_path)
@@ -10,16 +14,23 @@ bootstrap <- function(config_file_path = NULL) {
   }
 }
 
+#' Convenience method to refresh everything from the remote
+#'
 #' @export
 reload_data_remote <- function() {
   load_all_spreadsheet_data()
 }
 
+#' Convenience method to reload everything on disk
+#'
 #' @export
 reload_data_local <- function() {
   load_all_data_local()
 }
 
+#' Completely destroys the working directory
+#'
+#' @param are_you_sure Requires some thought before destruction
 #' @export
 nuke_content <- function(are_you_sure = FALSE) {
   if (are_you_sure) {
