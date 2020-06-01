@@ -2,7 +2,7 @@
 bootstrap <- function(config_file_path = NULL) {
   load_config(config_file_path = config_file_path)
   write_config(trp_config)
-  for (data_prefix in names(trp_config$data_lists)) {
+  for (data_prefix in DATA_LIST_TYPES) {
     if (trp_config$data_lists[[data_prefix]]$save) {
       fs::dir_create(fs::path(
         trp_config$working_directory,
