@@ -27,4 +27,5 @@ spreadsheets:
     url: https://dshs.texas.gov/coronavirus/TexasCOVID-19HospitalizationsOverTimebyTSA.xlsx
     etl_parser: ''
   texascovid19casecountdata.xlsx:
-    url: https://dsh
+    url: https://dshs.texas.gov/coronavirus/TexasCOVID19CaseCountData.xlsx
+    etl_parser: ''
