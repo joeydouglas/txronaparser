@@ -15,3 +15,13 @@ load_remote_spreadsheet <- function(spreadsheet_url, handle = insecure_handler_f
 
   raw_spreadsheet
 }
+
+# Scrapes the DSHS page for spreadsheets and returns the HTML
+scrape_source_page <- function(url_to_scrape = trp_config$dshs_data_source$url, handle = insecure_handler_factory()) {
+  temp_html <- tempfile()
+  curl::curl_download(url_to_scrape, temp_html, handle = handle)
+  data_html <- xml2::read_html(temp_html)
+  unlink(temp_html)
+
+  data_html
+}
