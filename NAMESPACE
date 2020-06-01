@@ -2,7 +2,9 @@
 
 export(bootstrap)
 export(default_config)
+export(etl_parser_county_cases)
 export(load_config)
 export(nuke_content)
 export(validate_config)
 export(write_config)
+importFrom(magrittr,"%>%")

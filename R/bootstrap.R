@@ -15,7 +15,7 @@ bootstrap <- function(config_file_path = NULL) {
 #' @export
 nuke_content <- function(are_you_sure = FALSE) {
   if (are_you_sure) {
-    if (!exists(trp_config)) {
+    if (!exists("trp_config")) {
       trp_config <- default_config()
     }
     fs::file_delete(trp_config$working_directory)
