@@ -3,6 +3,7 @@
 #' @param data_name The object name
 #' @param data_contents The actual value
 #' @param data_list_type The data list type to store it with
+#' @seealso \code{\link{DATA_LIST_TYPES}}
 #' @export
 save_single_data_local <- function(data_name, data_contents, data_list_type = "misc") {
   data_directory <- fs::path(trp_config$working_directory, data_list_type)
@@ -20,6 +21,7 @@ save_single_data_local <- function(data_name, data_contents, data_list_type = "m
 #'
 #' @param data_list The list to walk over and store
 #' @param data_list_type The data list type to store it with
+#' @seealso \code{\link{DATA_LIST_TYPES}}
 #' @export
 save_data_list_local <- function(data_list, data_list_type = "misc") {
   for (data_name in names(data_list)) {
@@ -43,6 +45,7 @@ save_all_data_local <- function(new_data = all_data) {
 #' @param data_list_type The data list type to load
 #' @param data_full_path Default \code{NULL}; if set will be used as the RDS path
 #' @return The contents of the loaded RDS file
+#' @seealso \code{\link{DATA_LIST_TYPES}}
 #' @export
 load_single_data_local <- function(data_name, data_list_type = "misc", data_file_path = NULL) {
   if (is.null(data_file_path)) {
@@ -62,6 +65,7 @@ load_single_data_local <- function(data_name, data_list_type = "misc", data_file
 #'
 #' @param data_list_type The data list type to load
 #' @return The entire loaded list
+#' @seealso \code{\link{DATA_LIST_TYPES}}
 #' @export
 load_data_list_local <- function(data_list_type = "misc") {
   data_files <- fs::dir_ls(
