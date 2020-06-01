@@ -1,4 +1,3 @@
-
 #' Finds all the Texas spreadsheets on the page
 #' @importFrom magrittr %>%
 parse_spreadsheet_urls <- function(data_html = scrape_source_page()) {
@@ -32,6 +31,7 @@ parse_spreadsheet_urls <- function(data_html = scrape_source_page()) {
   urls_to_scrape
 }
 
+#' Either loads an existing ETL parser or returns an anonymous function that does nothing
 get_etl_parser <- function(etl_parser_name) {
   full_name <- paste0("etl_parser_", etl_parser_name)
   if (exists(full_name, where = "package:txronaparser", mode = "function")) {

@@ -90,7 +90,7 @@ load_config <- function(config_file_path = NULL) {
   )
 }
 
-# Ensures all discovered spreadsheets are in the config file
+#' Ensures all discovered spreadsheets are in the config file
 generate_new_spreadsheets_config <- function(spreadsheet_urls = parse_spreadsheet_urls()) {
   new_spreadsheets <- trp_config$spreadsheets
   for (spreadsheet_url in spreadsheet_urls) {

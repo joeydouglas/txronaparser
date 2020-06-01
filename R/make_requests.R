@@ -6,6 +6,7 @@ insecure_handler_factory <- function() {
   insecure_handle
 }
 
+#' Loads a remote spreadsheet using the insecure handler
 #' @note May need to include ways to pass args to readxl
 load_remote_spreadsheet <- function(spreadsheet_url, handle = insecure_handler_factory()) {
   temp_spreadsheet <- tempfile(fileext = paste(".", fs::path_ext(spreadsheet_url), sep = ""))
