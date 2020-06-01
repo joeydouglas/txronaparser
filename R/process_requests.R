@@ -50,3 +50,18 @@ load_single_spreadsheet_data <- function(spreadsheet_name) {
     "parsed" = new_parsed_data
   )
 }
+
+load_all_spreadsheet_data <- function(spreadsheet_config_list = trp_config$spreadsheets) {
+  raw_data <- list()
+  parsed_data <- list()
+  for (spreadsheet_name in names(spreadsheet_config_list)) {
+    results <- load_single_spreadsheet_data(spreadsheet_name)
+    raw_data[[spreadsheet_name]] <- results[["raw"]]
+    parsed_data <- append(parsed_data, results[["parsed"]])
+  }
+
+  list(
+    "raw" = raw_data,
+    "parsed" = parsed_data
+  )
+}
