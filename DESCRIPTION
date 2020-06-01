@@ -8,7 +8,10 @@ Description: Parses data from the TX DSHS additional data page
 License: Apache License (>= 2.0)
 Encoding: UTF-8
 LazyData: true
-Imports: 
-    settings,
-    fs
+Imports:
+    fs,
+    yaml,
+    jsonvalidate,
+    jsonlite
 RoxygenNote: 7.1.0
+StagedInstall: no
