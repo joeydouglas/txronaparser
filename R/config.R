@@ -1,3 +1,4 @@
+#' @export
 default_config <- function() {
   yaml::read_yaml(
     DEFAULT_CONFIG_FILE_PATH,
@@ -5,6 +6,7 @@ default_config <- function() {
   )
 }
 
+#' @export
 validate_config <- function(config_to_validate) {
   validator <- jsonvalidate::json_validator(CONFIG_SCHEMA_PATH)
   validator(
@@ -14,6 +16,7 @@ validate_config <- function(config_to_validate) {
   )
 }
 
+#' @export
 write_config <- function(config = NULL) {
   if (is.null(config)) {
     if (exists("trp_config", envir = .GlobalEnv)) {
@@ -35,6 +38,7 @@ write_config <- function(config = NULL) {
   )
 }
 
+#' @export
 load_config <- function(config_file_path) {
   defaults <- default_config()
   if (fs::is_file(config_file_path)) {
