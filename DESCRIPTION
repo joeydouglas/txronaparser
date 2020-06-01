@@ -10,6 +10,8 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     fs,
-    yaml
+    yaml,
+    jsonvalidate,
+    jsonlite
 RoxygenNote: 7.1.0
 StagedInstall: no
