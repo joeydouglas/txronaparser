@@ -44,6 +44,12 @@ load_single_spreadsheet_data <- function(spreadsheet_name) {
   spreadsheet_config <- trp_config$spreadsheets[[spreadsheet_name]]
   new_raw_data <- load_remote_spreadsheet(spreadsheet_config$url)
   new_parsed_data <- get_etl_parser(spreadsheet_config$etl_parser)(new_raw_data)
+  if (trp_config$data_lists[["raw"]]$save) {
+    save_single_data_local(spreadsheet_name, new_raw_data, "raw")
+  }
+  if (trp_config$data_lists[["parsed"]]$save) {
+    save_data_list_local(new_parsed_data, "parsed")
+  }
 
   list(
     "raw" = new_raw_data,
