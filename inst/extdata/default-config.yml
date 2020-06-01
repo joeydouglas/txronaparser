@@ -6,3 +6,7 @@ data_lists:
     save: true
   parsed:
     save: true
+dshs_data_source:
+  url: https://dshs.texas.gov/coronavirus/additionaldata/
+  h2_lead: Texas Data
+  href_lead: /coronavirus
