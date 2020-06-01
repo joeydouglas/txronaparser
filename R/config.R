@@ -1,3 +1,6 @@
+#' Load the default config shipped with the package
+#'
+#' @return the default config
 #' @export
 default_config <- function() {
   yaml::read_yaml(
@@ -6,6 +9,10 @@ default_config <- function() {
   )
 }
 
+#' Validates a given config against the config schema. It will silently succeed
+#' or loudly fail.
+#'
+#' @param config_to_validate Some config object to validate
 #' @export
 validate_config <- function(config_to_validate) {
   validator <- jsonvalidate::json_validator(CONFIG_SCHEMA_PATH)
@@ -16,6 +23,9 @@ validate_config <- function(config_to_validate) {
   )
 }
 
+#' Writes the provided config object to the proper location
+#'
+#' @param config A config object
 #' @export
 write_config <- function(config = NULL) {
   if (is.null(config)) {
@@ -40,6 +50,14 @@ write_config <- function(config = NULL) {
   )
 }
 
+#' Loads a config file. If nothing is passed, it loads the default. If a
+#' directory is passed, it looks for \code{config.yml} in that directory. If anything
+#' else is passed, it will attempt to load that as a file. If any of that fails,
+#' this will return the defaults.
+#'
+#' The result is loaded as \code{.GlobalEnv$trp_config}.
+#'
+#' @param config_file_path A path
 #' @export
 load_config <- function(config_file_path = NULL) {
   defaults <- default_config()
@@ -72,7 +90,7 @@ load_config <- function(config_file_path = NULL) {
   )
 }
 
-# Ensures all discovered spreadsheets are in the config file
+#' Ensures all discovered spreadsheets are in the config file
 generate_new_spreadsheets_config <- function(spreadsheet_urls = parse_spreadsheet_urls()) {
   new_spreadsheets <- trp_config$spreadsheets
   for (spreadsheet_url in spreadsheet_urls) {
