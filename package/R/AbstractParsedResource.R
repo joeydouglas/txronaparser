@@ -12,6 +12,7 @@ AbstractParsedResource <- R6::R6Class(
     #' initialize
     #' @param raw_data raw_data
     #' @param can_spawn can_spawn
+    #' @param init_data init_data
     initialize = function(raw_data = NULL, can_spawn = FALSE, init_data = NULL) {
       flog.trace("Called initialize on AbstractParsedResource with %s", can_spawn)
       if (!is.null(raw_data)) {
@@ -22,6 +23,7 @@ AbstractParsedResource <- R6::R6Class(
       private$.column_lead = init_data$column_lead
       private$.table_lead = init_data$table_lead
       private$.table_tail = init_data$table_tail
+      private$.sql_table = init_data$sql_table
 
       invisible(self)
     },
@@ -32,6 +34,18 @@ AbstractParsedResource <- R6::R6Class(
       if (force) {
         private$.internal_extract()
       }
+    },
+    #' @description
+    #' transform
+    transform = function() {
+      private$.generic_pre_transform()
+      private$.strip_population()
+      private$.generic_transform()
+    },
+    #' @description
+    #' load
+    load = function() {
+      private$.generic_load()
     },
     #' @description
     #' get_population_data
@@ -82,11 +96,33 @@ AbstractParsedResource <- R6::R6Class(
           date = seq.Date(min(date), max(date), by = "day"),
         )
     },
+    .generic_load = function() {
+      connection <- DBI::dbConnect(
+        drv = RMariaDB::MariaDB(),
+        group = "txronaparser"
+      )
+      dplyr::copy_to(
+        connection,
+        private$.population_data,
+        "population_data",
+        temporary = FALSE,
+        overwrite = TRUE
+      )
+      dplyr::copy_to(
+        connection,
+        private$.value,
+        private$.sql_table,
+        temporary = FALSE,
+        overwrite = TRUE
+      )
+      DBI::dbDisconnect(connection)
+    },
     .should_extract = TRUE,
     .raw_value = NA,
     .column_lead = NA,
     .table_lead = NA,
     .table_tail = NA,
+    .sql_table = NA,
     .population_data = NA
   )
 )
