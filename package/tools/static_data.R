@@ -30,6 +30,12 @@ PARSED_RESOURCE_DATA <- list(
     "table_lead" = "County Name",
     "table_tail" = "Total",
     "sql_table" = "total_fatality_data"
+  ),
+  "CumulativeTestsoverTimebyCounty" = list(
+    "column_lead" = "tests",
+    "table_lead" = "County",
+    "table_tail" = "TOTAL",
+    "sql_table" = "total_test_data"
   )
 )
 
@@ -40,3 +46,5 @@ usethis::use_data(
   internal = TRUE,
   overwrite = TRUE
 )
+
+rm(list = c("ROOT_RESOURCE_DATA", "RAW_RESOURCE_DATA", "PARSED_RESOURCE_DATA"))
