@@ -26,7 +26,7 @@ PARSED_RESOURCE_DATA <- list(
     "sql_table" = "total_case_data"
   ),
   "FatalitiesoverTimebyCounty" = list(
-    "column_load" = "fatalities",
+    "column_lead" = "fatalities",
     "table_lead" = "County Name",
     "table_tail" = "Total",
     "sql_table" = "total_fatality_data"

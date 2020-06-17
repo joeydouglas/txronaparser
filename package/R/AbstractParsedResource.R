@@ -84,7 +84,7 @@ AbstractParsedResource <- R6::R6Class(
           values_to = "temp_col"
         ) %>%
         # Convert the string date to something programmatically usable
-        dplyr::mutate(date = as.Date(stringr::str_replace(date, "^.*(\\d+)-(\\d+).*$", "2020-\\1-\\2"))) %>%
+        dplyr::mutate(date = as.Date(stringr::str_replace(date, "^.*(\\d+)[-/](\\d+).*$", "2020-\\1-\\2"))) %>%
         # Reshape the data into rows of (date, total X in county a, total X in county b, ...)
         tidyr::pivot_wider(
           names_from = county_name,
