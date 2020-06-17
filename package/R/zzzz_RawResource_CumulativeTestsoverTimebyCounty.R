@@ -17,7 +17,7 @@ RawResourceCumulativeTestsoverTimebyCounty <- R6::R6Class(
   ),
   private = list(
     .spawn = function()(
-      print(private$name)
+      print(private$.name)
     )
   )
 )
