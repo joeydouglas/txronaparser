@@ -12,13 +12,16 @@ AbstractParsedResource <- R6::R6Class(
     #' initialize
     #' @param raw_data raw_data
     #' @param can_spawn can_spawn
-    initialize = function(raw_data = NULL, can_spawn = FALSE) {
+    initialize = function(raw_data = NULL, can_spawn = FALSE, init_data = NULL) {
       flog.trace("Called initialize on AbstractParsedResource with %s", can_spawn)
       if (!is.null(raw_data)) {
         private$.raw_value = raw_data
         private$.should_extract = FALSE
       }
       private$.can_spawn = can_spawn
+      private$.column_lead = init_data$column_lead
+      private$.table_lead = init_data$table_lead
+      private$.table_tail = init_data$table_tail
 
       invisible(self)
     },
@@ -29,11 +32,61 @@ AbstractParsedResource <- R6::R6Class(
       if (force) {
         private$.internal_extract()
       }
+    },
+    #' @description
+    #' get_population_data
+    get_population_data = function() {
+      private$.population_data
     }
   ),
   private = list(
     .internal_extract = function() { stop(ERROR_IS_ABSTRACT_METHOD) },
+    #' @importFrom magrittr %>%
+    .generic_pre_transform = function() {
+      # Extract only the data from the provided sheet
+      private$.value <- private$.raw_value %>%
+        dplyr::slice(which(.[,1] == private$.table_lead):which(.[,1] == private$.table_tail)) %>%
+        # Convert the first row to column names
+        `colnames<-`(tolower(stringr::str_replace(.[1,], "\\s+", "_"))) %>%
+        .[-1,] %>%
+        dplyr::mutate_at(dplyr::vars(c("population", dplyr::starts_with(private$.column_lead))), as.numeric) %>%
+        dplyr::mutate(county_name = stringr::str_replace(county_name, "\\s+", "_"))
+    },
+    #' @importFrom magrittr %>%
+    .strip_population = function() {
+      private$.population_data <- private$.value[,1:2]
+
+      private$.value <- private$.value %>%
+        # Strip populations column
+        .[,-2]
+    },
+    #' @importFrom magrittr %>%
+    .generic_transform = function() {
+      private$.value <- private$.value %>%
+        # Reshape the data into rows of (county name, date, total X count)
+        tidyr::pivot_longer(
+          cols = dplyr::starts_with(private$.column_lead),
+          names_to = "date",
+          values_to = "temp_col"
+        ) %>%
+        # Convert the string date to something programmatically usable
+        dplyr::mutate(date = as.Date(stringr::str_replace(date, "^.*(\\d+)-(\\d+).*$", "2020-\\1-\\2"))) %>%
+        # Reshape the data into rows of (date, total X in county a, total X in county b, ...)
+        tidyr::pivot_wider(
+          names_from = county_name,
+          values_from = temp_col,
+          values_fill = 0
+        ) %>%
+        dplyr::arrange(date) %>%
+        tidyr::complete(
+          date = seq.Date(min(date), max(date), by = "day"),
+        )
+    },
     .should_extract = TRUE,
-    .raw_value = NA
+    .raw_value = NA,
+    .column_lead = NA,
+    .table_lead = NA,
+    .table_tail = NA,
+    .population_data = NA
   )
 )

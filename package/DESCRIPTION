@@ -19,7 +19,8 @@ Imports:
     RMariaDB,
     tidyr,
     dplyr,
-    futile.logger
+    futile.logger,
+    stringr
 RoxygenNote: 7.1.0
 StagedInstall: no
 Depends: 

@@ -20,6 +20,12 @@ RAW_RESOURCE_DATA <- list(
 
 PARSED_RESOURCE_DATA <- list(
   "CasesoverTimebyCounty" = list(
+    "column_lead" = "cases",
+    "table_lead" = "County Name",
+    "table_tail" = "Total"
+  ),
+  "FatalitiesoverTimebyCounty" = list(
+    "column_load" = "fatalities",
     "table_lead" = "County Name",
     "table_tail" = "Total"
   )
