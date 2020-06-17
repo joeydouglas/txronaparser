@@ -1,9 +1,9 @@
 # Copyright 2020 CJ Harries
 # Licensed under http://www.apache.org/licenses/LICENSE-2.0
 
-#' ParsedResourceCasesoverTimebyCounty
-ParsedResourceCasesoverTimebyCounty <- R6::R6Class(
-  classname = "ParsedResourceCasesoverTimebyCounty",
+#' ParsedResourceFatalitiesoverTimebyCounty
+ParsedResourceFatalitiesoverTimebyCounty <- R6::R6Class(
+  classname = "ParsedResourceFatalitiesoverTimebyCounty",
   portable = TRUE,
   parent_env = RONA_WORLD,
   inherit = AbstractParsedResource,
@@ -16,7 +16,7 @@ ParsedResourceCasesoverTimebyCounty <- R6::R6Class(
     initialize = function(
       raw_data = NULL,
       can_spawn = FALSE,
-      init_data = PARSED_RESOURCE_DATA[["CasesoverTimebyCounty"]]
+      init_data = PARSED_RESOURCE_DATA[["FatalitiesoverTimebyCounty"]]
     ) {
       super$initialize(raw_data = raw_data, can_spawn = can_spawn, init_data = init_data)
     }

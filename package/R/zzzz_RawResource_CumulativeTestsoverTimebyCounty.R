@@ -14,10 +14,5 @@ RawResourceCumulativeTestsoverTimebyCounty <- R6::R6Class(
     #' @description
     #' load
     load = function() { invisible(self) }
-  ),
-  private = list(
-    .spawn = function()(
-      print(private$name)
-    )
   )
 )

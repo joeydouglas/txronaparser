@@ -30,12 +30,22 @@ AbstractRawResource <- R6::R6Class(
       flog.debug("Extracting data")
       flog.trace(private$url, name = "data")
       flog.trace(private$data, name = "data")
-      self$value <- excel_curl_loader(private$.url)
+      private$.value <- excel_curl_loader(private$.url)
 
       invisible(self)
     }
   ),
   private = list(
-    .url = NA
+    .url = NA,
+    .spawn = function() {
+      resource_name <- paste0("ParsedResource", private$.name)
+      parsed_resource_class <- get(resource_name, RONA_WORLD)
+      parsed_resource <- parsed_resource_class$new(
+        raw_data = self$value,
+        can_spawn = TRUE
+      )
+      RONA_WORLD[[tolower(resource_name)]] <- parsed_resource
+      parsed_resource$etl()$spawn()
+    }
   )
 )

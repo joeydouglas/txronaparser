@@ -1,7 +1,7 @@
 Package: txronaparser
 Type: Package
 Title: Parse TX DSHS Data
-Version: 0.3.0
+Version: 0.4.0
 Author: CJ Harries
 Maintainer: CJ Harries <cj@wizardsoftheweb.pro>
 Description: Parses data from the TX DSHS additional data page, reshapes it for
@@ -19,7 +19,8 @@ Imports:
     RMariaDB,
     tidyr,
     dplyr,
-    futile.logger
+    futile.logger,
+    stringr
 RoxygenNote: 7.1.0
 StagedInstall: no
 Depends: 
