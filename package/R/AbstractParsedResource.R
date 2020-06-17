@@ -61,10 +61,10 @@ AbstractParsedResource <- R6::R6Class(
       private$.value <- private$.raw_value %>%
         dplyr::slice(which(.[,1] == private$.table_lead):which(.[,1] == private$.table_tail)) %>%
         # Convert the first row to column names
-        `colnames<-`(tolower(stringr::str_replace(.[1,], "\\s+", "_"))) %>%
+        `colnames<-`(tolower(stringr::str_replace_all(.[1,], "\\s+", "_"))) %>%
         .[-1,] %>%
         dplyr::mutate_at(dplyr::vars(c("population", dplyr::starts_with(private$.column_lead))), as.numeric) %>%
-        dplyr::mutate(county_name = stringr::str_replace(county_name, "\\s+", "_"))
+        dplyr::mutate(county_name = stringr::str_replace_all(county_name, "\\s+", "_"))
     },
     #' @importFrom magrittr %>%
     .strip_population = function() {
@@ -84,7 +84,10 @@ AbstractParsedResource <- R6::R6Class(
           values_to = "temp_col"
         ) %>%
         # Convert the string date to something programmatically usable
-        dplyr::mutate(date = as.Date(stringr::str_replace(date, "^.*(\\d+)[-/](\\d+).*$", "2020-\\1-\\2"))) %>%
+        dplyr::mutate(date = as.Date(
+          stringr::str_replace(date, "^.*?(\\d+|[a-z]+)[-/_\\s](\\d+)\\*?\\s*$", "2020-\\1-\\2"),
+          tryFormats = c("%Y-%m-%d", "%Y-%B-%d")
+        )) %>%
         # Reshape the data into rows of (date, total X in county a, total X in county b, ...)
         tidyr::pivot_wider(
           names_from = county_name,
@@ -101,13 +104,15 @@ AbstractParsedResource <- R6::R6Class(
         drv = RMariaDB::MariaDB(),
         group = "txronaparser"
       )
-      dplyr::copy_to(
-        connection,
-        private$.population_data,
-        "population_data",
-        temporary = FALSE,
-        overwrite = TRUE
-      )
+      if (!is.na(private$.population_data)) {
+        dplyr::copy_to(
+          connection,
+          private$.population_data,
+          "population_data",
+          temporary = FALSE,
+          overwrite = TRUE
+        )
+      }
       dplyr::copy_to(
         connection,
         private$.value,
