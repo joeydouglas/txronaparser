@@ -30,7 +30,7 @@ AbstractRawResource <- R6::R6Class(
       flog.debug("Extracting data")
       flog.trace(private$url, name = "data")
       flog.trace(private$data, name = "data")
-      self$value <- excel_curl_loader(private$.url)
+      private$.value <- excel_curl_loader(private$.url)
 
       invisible(self)
     }
