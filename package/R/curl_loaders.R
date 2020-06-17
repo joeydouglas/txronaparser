@@ -1,6 +1,7 @@
 # Copyright 2020 CJ Harries
 # Licensed under http://www.apache.org/licenses/LICENSE-2.0
 
+#' factory_curl_loader
 factory_curl_loader <- function(file_loader) {
   force(file_loader)
   # insecure_handle <- curl::new_handle(SSL_VERIFYPEER = 0)
@@ -16,6 +17,8 @@ factory_curl_loader <- function(file_loader) {
   }
 }
 
+#' excel_curl_loader
 excel_curl_loader <- factory_curl_loader(readxl::read_excel)
 
+#' html_curl_loader
 html_curl_loader <- factory_curl_loader(xml2::read_html)

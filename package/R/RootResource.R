@@ -1,12 +1,17 @@
 # Copyright 2020 CJ Harries
 # Licensed under http://www.apache.org/licenses/LICENSE-2.0
 
+#' RootResource
 RootResource <- R6::R6Class(
   classname = "RootResource",
   portable = TRUE,
   parent_env = RONA_WORLD,
   inherit = AbstractResource,
   public = list(
+    #' @description
+    #' initialize
+    #' @param can_spawn can_spawn
+    #' @param init_data init_data
     initialize = function(can_spawn = FALSE, init_data = ROOT_RESOURCE_DATA) {
       flog.trace("Called initialize on RootResource with %s", can_spawn)
       flog.trace(init_data)
@@ -17,6 +22,8 @@ RootResource <- R6::R6Class(
 
       invisible(self)
     },
+    #' @description
+    #' extract
     extract = function() {
       flog.trace("Extracting root data")
       self$value <- html_curl_loader(private$url)
@@ -24,6 +31,8 @@ RootResource <- R6::R6Class(
 
       invisible(self)
     },
+    #' @description
+    #' transform
     transform = function() {
       flog.trace("Transforming root data")
       # Need to dupe for the interpolation
@@ -49,6 +58,8 @@ RootResource <- R6::R6Class(
 
       self$value
     },
+    #' @description
+    #' load
     load = function() {
 
     }

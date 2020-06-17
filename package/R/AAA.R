@@ -1,6 +1,8 @@
 # Copyright 2020 CJ Harries
 # Licensed under http://www.apache.org/licenses/LICENSE-2.0
 
+
+#' @importFrom futile.logger flog.trace flog.debug flog.info flog.warn flog.error flog.fatal
 futile.logger::flog.threshold(futile.logger::TRACE)
 futile.logger::flog.logger(
   "data",
@@ -9,19 +11,13 @@ futile.logger::flog.logger(
   futile.logger::layout.tracearg
 )
 
-# data(sysdata)
-
-#' Contains data necessary to properly scrape the root page
-"ROOT_RESOURCE_DATA"
-
-#' Contains data necessary to properly scrape child spreadsheets
-"RAW_RESOURCE_DATA"
-
-#' Contains data necessary to properly parse child spreadsheets
-"PARSED_RESOURCE_DATA"
-
+#' The finished environment
+#' @export
 RONA_WORLD <- new.env(hash = FALSE)
 
-# RONA_WORLD[["ROOT_RESOURCE_DATA"]] <- ROOT_RESOURCE_DATA
-# RONA_WORLD[["RAW_RESOURCE_DATA"]] <- RAW_RESOURCE_DATA
-# RONA_WORLD[["PARSED_RESOURCE_DATA"]] <- PARSED_RESOURCE_DATA
+#' Updates all data
+#' @export
+update_data <- function() {
+  orchestrator <- ResourceOrchestrator$new()
+  orchestrator$e2e_automated()
+}

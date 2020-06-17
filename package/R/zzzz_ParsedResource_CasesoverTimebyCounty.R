@@ -1,21 +1,29 @@
 # Copyright 2020 CJ Harries
 # Licensed under http://www.apache.org/licenses/LICENSE-2.0
 
+#' ParsedResourceCasesoverTimebyCounty
 ParsedResourceCasesoverTimebyCounty <- R6::R6Class(
   classname = "ParsedResourceCasesoverTimebyCounty",
   portable = TRUE,
   parent_env = RONA_WORLD,
   inherit = AbstractParsedResource,
   public = list(
+    #' @description
+    #' initialize
+    #' @param raw_data raw_data
+    #' @param can_spawn can_spawn
+    #' @param init_data init_data
     initialize = function(
-      init_data = PARSED_RESOURCE_DATA[["CasesoverTimebyCounty"]],
       raw_data = NULL,
-      can_spawn = FALSE
-      ) {
+      can_spawn = FALSE,
+      init_data = PARSED_RESOURCE_DATA[["CasesoverTimebyCounty"]]
+    ) {
       super$initialize(raw_data = raw_data, can_spawn = can_spawn)
       private$.table_lead = init_data$table_lead
       private$.table_tail = init_data$table_tail
     },
+    #' @description
+    #' load
     load = function() {
       connection <- DBI::dbConnect(
         drv = RMariaDB::MariaDB(),
@@ -37,6 +45,9 @@ ParsedResourceCasesoverTimebyCounty <- R6::R6Class(
       )
       DBI::dbDisconnect(connection)
     },
+    #' @description
+    #' transform
+    #' @importFrom magrittr %>%
     transform = function() {
       # Extract only the data from the provided sheet
       usable_spreadsheet <- private$.raw_value %>%

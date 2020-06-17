@@ -8,7 +8,11 @@ RawResourceAccessibleDashboardData <- R6::R6Class(
   parent_env = RONA_WORLD,
   inherit = AbstractRawResource,
   public = list(
+    #' @description
+    #' transform
     transform = function() { invisible(self) },
+    #' @description
+    #' load
     load = function() { invisible(self) }
   ),
   private = list(

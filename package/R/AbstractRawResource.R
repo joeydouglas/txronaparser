@@ -1,12 +1,18 @@
 # Copyright 2020 CJ Harries
 # Licensed under http://www.apache.org/licenses/LICENSE-2.0
 
+#' AbstractRawResource
 AbstractRawResource <- R6::R6Class(
   classname = "AbstractRawResource",
   portable = TRUE,
   parent_env = RONA_WORLD,
   inherit = AbstractResource,
   public = list(
+    #' @description
+    #' initialize
+    #' @param name name
+    #' @param url url
+    #' @param can_spawn can_spawn
     initialize = function(name, url, can_spawn = FALSE) {
       flog.trace("Called initialize on AbstractRawResource")
       flog.trace(name, name = "data")
@@ -18,6 +24,8 @@ AbstractRawResource <- R6::R6Class(
 
       invisible(self)
     },
+    #' @description
+    #' extract
     extract = function() {
       flog.debug("Extracting data")
       flog.trace(private$url, name = "data")
