@@ -5,3 +5,5 @@
 ^dev-files$
 ^README\.md$
 ^\.editorconfig$
+^\.bumpversion.cfg$
+^scratch$

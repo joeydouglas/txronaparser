@@ -4,10 +4,11 @@ Title: Parse TX DSHS Data
 Version: 0.2.0
 Author: CJ Harries
 Maintainer: CJ Harries <cj@wizardsoftheweb.pro>
-Description: Parses data from the TX DSHS additional data page
+Description: Parses data from the TX DSHS additional data page, reshapes it for
+    programmatic use, and sends it off.
 License: Apache License (>= 2.0)
 Encoding: UTF-8
-LazyData: true
+LazyData: false
 Imports:
     fs,
     yaml,
@@ -16,6 +17,13 @@ Imports:
     curl,
     readxl,
     xml2,
-    magrittr
+    magrittr,
+    DBI,
+    RMariaDB,
+    tidyr,
+    dplyr,
+    futile.logger
 RoxygenNote: 7.1.0
 StagedInstall: no
+Depends: 
+    R (>= 2.10)

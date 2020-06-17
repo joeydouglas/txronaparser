@@ -1,3 +1,4 @@
-#' Warning for nuke_content without \code{are_you_sure}
-#' @seealso \code{\link{nuke_content}}
-WARNING_NUKE_CONTENT <- "You must explicitly 'TRUE' in order to delete all local files; nothing happened"
+ERROR_IS_ABSTRACT_CLASS <- "is abstract and cannot be instantiated"
+ERROR_IS_ABSTRACT_METHOD <- "is abstract and has no implementation"
+
+XPATH_SPREADSHEET_URLS <- "//h2[./u[text() = '${h2_lead}']]/following-sibling::h6/a[starts-with(@href, '${href_lead}') and (substring(@href, string-length(./@href) - 3) = 'xlsx' or substring(@href, string-length(./@href) - 2) = 'xls')]"
