@@ -36,6 +36,12 @@ PARSED_RESOURCE_DATA <- list(
     "table_lead" = "County",
     "table_tail" = "TOTAL",
     "sql_table" = "total_test_data"
+  ),
+  "EstimatedActiveCasesoverTimebyCounty" = list(
+    "column_lead" = "active",
+    "table_lead" = "County",
+    "table_tail" = "Zavala",
+    "sql_table" = "estimated_active_case_data"
   )
 )
 
