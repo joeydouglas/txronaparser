@@ -16,9 +16,9 @@ RootResource <- R6::R6Class(
       flog.trace("Called initialize on RootResource with %s", can_spawn)
       flog.trace(init_data)
       private$.can_spawn <- can_spawn
-      private$url <- init_data$url
-      private$h2_lead <- init_data$h2_lead
-      private$href_lead <- init_data$href_lead
+      private$.url <- init_data$url
+      private$.h2_lead <- init_data$h2_lead
+      private$.href_lead <- init_data$href_lead
 
       invisible(self)
     },
@@ -26,27 +26,28 @@ RootResource <- R6::R6Class(
     #' extract
     extract = function() {
       flog.trace("Extracting root data")
-      self$value <- html_curl_loader(private$url)
+      private$.value <- html_curl_loader(private$.url)
       flog.trace("loaded something")
 
       invisible(self)
     },
     #' @description
     #' transform
+    #' @importFrom magrittr %>%
     transform = function() {
       flog.trace("Transforming root data")
       # Need to dupe for the interpolation
-      h2_lead <- private$h2_lead
-      href_lead <- private$href_lead
+      h2_lead <- private$.h2_lead
+      href_lead <- private$.href_lead
 
-      self$value <- self$value %>%
+      private$.value <- private$.value %>%
         xml2::xml_find_all(stringr::str_interp(XPATH_SPREADSHEET_URLS)) %>%
         sapply(
           .,
           function(node) {
             parsed <- list()
             parsed[[gsub("[^[:alnum:]]", "", xml2::xml_text(node, trim = TRUE))]] <- paste0(
-              gsub(paste0(href_lead, ".*$"), "", private$url),
+              gsub(paste0(href_lead, ".*$"), "", private$.url),
               xml2::xml_attr(node, "href")
             )
 
@@ -65,9 +66,9 @@ RootResource <- R6::R6Class(
     }
   ),
   private = list(
-    url = NA,
-    h2_lead = NA,
-    href_lead = NA,
+    .url = NA,
+    .h2_lead = NA,
+    .href_lead = NA,
     .spawn = function() {
       flog.info("Root is spawning RawResources")
       for (spreadsheet_name in names(self$value)) {
