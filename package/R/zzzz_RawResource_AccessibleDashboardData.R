@@ -1,3 +1,6 @@
+# Copyright 2020 CJ Harries
+# Licensed under http://www.apache.org/licenses/LICENSE-2.0
+
 #' Skipping this; it's the processed stuff visible on the main page
 RawResourceAccessibleDashboardData <- R6::R6Class(
   classname = "RawResourceAccessibleDashboardData",

@@ -1,3 +1,6 @@
+# Copyright 2020 CJ Harries
+# Licensed under http://www.apache.org/licenses/LICENSE-2.0
+
 RawResourceCumulativeTestsoverTimebyCounty <- R6::R6Class(
   classname = "RawResourceCumulativeTestsoverTimebyCounty",
   portable = TRUE,

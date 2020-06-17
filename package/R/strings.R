@@ -1,3 +1,6 @@
+# Copyright 2020 CJ Harries
+# Licensed under http://www.apache.org/licenses/LICENSE-2.0
+
 ERROR_IS_ABSTRACT_CLASS <- "is abstract and cannot be instantiated"
 ERROR_IS_ABSTRACT_METHOD <- "is abstract and has no implementation"
 

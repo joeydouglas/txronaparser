@@ -1,3 +1,6 @@
+# Copyright 2020 CJ Harries
+# Licensed under http://www.apache.org/licenses/LICENSE-2.0
+
 factory_curl_loader <- function(file_loader) {
   force(file_loader)
   # insecure_handle <- curl::new_handle(SSL_VERIFYPEER = 0)

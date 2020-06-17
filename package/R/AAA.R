@@ -1,3 +1,6 @@
+# Copyright 2020 CJ Harries
+# Licensed under http://www.apache.org/licenses/LICENSE-2.0
+
 futile.logger::flog.threshold(futile.logger::TRACE)
 futile.logger::flog.logger(
   "data",
