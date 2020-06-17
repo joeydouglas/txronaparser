@@ -14,8 +14,14 @@ You'll need [`devtools`](https://cran.r-project.org/package=devtools).
 devtools::install_github("thecjharries/txronaparser")
 ```
 
-## Current Called Out Needs
+## Database Setup
 
-(there are plenty more that aren't called out)
+You'll need to provide database connection details in something like the `~/.my.cnf` file using the `txronaparser` group.
 
-* Decouple `ParserResource$load` from `RawResources$value`
+```ini
+[txronaparser]
+database = txronaparser
+user = some_user
+password = some_password
+...
+```
