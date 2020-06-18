@@ -20,7 +20,8 @@ Imports:
     tidyr,
     dplyr,
     futile.logger,
-    stringr
+    stringr,
+    dbplyr
 RoxygenNote: 7.1.0
 StagedInstall: no
 Depends: 
