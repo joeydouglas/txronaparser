@@ -10,6 +10,6 @@ RUN R -e 'install.packages(c("curl"))'
 RUN R -e 'install.packages(c("gh"))' 
 RUN R -e 'install.packages(c("devtools"))'
 RUN R -e "devtools::install_github('thecjharries/txronaparser', ref = 'main', subdir = 'package')"
-CMD ["R", "-e txronaparser::update_data()"]
+CMD ["R", "-e Sys.sleep(30);txronaparser::update_data()"]
 
 

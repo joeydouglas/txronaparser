@@ -10,3 +10,8 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     network_mode: "host"
     restart: always
+
+  txronaparser:
+    image: 557349407515.dkr.ecr.us-east-2.amazonaws.com/txronaparser:0.3
+    container_name: txronaparser
+    network_mode: "host"
