@@ -5,13 +5,35 @@ services:
     container_name: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: rona
-      MYSQL_USER: grafana
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports: 
+      - 3306:3306
     network_mode: "host"
-    restart: always
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:7.0.3-ubuntu
+    container_name: grafana-rona
+    ports: 
+      - 3000:3000
+    network_mode: "host"
+    volumes:
+      - ./grafana/conf/provisioning/:/etc/grafana/provisioning/
+      - ./grafana/conf/provisioning/:/usr/share/grafana/conf/provisioning/
+    restart: unless-stopped    
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - MYSQL_ROOT_USER=${MYSQL_ROOT_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DB=${MYSQL_DB}
+      - MYSQL_HOST=${MYSQL_HOST}
 
   txronaparser:
-    image: 557349407515.dkr.ecr.us-east-2.amazonaws.com/txronaparser:0.3
+    image: 557349407515.dkr.ecr.us-east-2.amazonaws.com/txronaparser:0.4
     container_name: txronaparser
     network_mode: "host"

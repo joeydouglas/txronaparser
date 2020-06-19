@@ -1,0 +1,13 @@
+apiVersion: 1
+datasources:
+  - name: MariaDB
+    type: mysql
+    isDefault: true
+    access: proxy
+    orgId: 1
+    uid: ronaDB
+    host: $MYSQL_HOST
+    database: $MYSQL_DB
+    user: $MYSQL_USER
+    password: $MYSQL_PASSWORD
+
