@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+  mariadb:
+    image: mariadb:10.5.3 
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: rona
+      MYSQL_USER: grafana
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    network_mode: "host"
+    restart: always
